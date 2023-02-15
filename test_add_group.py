@@ -16,12 +16,15 @@ class TestAddGroup(unittest.TestCase):
         self.open_group_page(wd)
         self.init_group_creation(wd)
         self.fill_group_form(wd)
-        # submit group creation
-        wd.find_element_by_name("submit").click()
+        self.submit_group_creation(wd)
         # return to group page
         wd.find_element_by_link_text("group page").click()
         # logout
         wd.find_element_by_link_text("Logout").click()
+
+    def submit_group_creation(self, wd):
+        # submit group creation
+        wd.find_element_by_name("submit").click()
 
     def fill_group_form(self, wd):
         # fill group form
