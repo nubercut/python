@@ -13,8 +13,7 @@ class TestAddGroup(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd)
-        # open groups page
-        wd.find_element_by_link_text("groups").click()
+        self.open_group_page(wd)
         # init group creation
         wd.find_element_by_name("new").click()
         # fill group form
@@ -33,6 +32,10 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_link_text("group page").click()
         # logout
         wd.find_element_by_link_text("Logout").click()
+
+    def open_group_page(self, wd):
+        # open groups page
+        wd.find_element_by_link_text("groups").click()
 
     def login(self, wd):
         # login
