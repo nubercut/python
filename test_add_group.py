@@ -15,6 +15,15 @@ class TestAddGroup(unittest.TestCase):
         self.login(wd)
         self.open_group_page(wd)
         self.init_group_creation(wd)
+        self.fill_group_form(wd)
+        # submit group creation
+        wd.find_element_by_name("submit").click()
+        # return to group page
+        wd.find_element_by_link_text("group page").click()
+        # logout
+        wd.find_element_by_link_text("Logout").click()
+
+    def fill_group_form(self, wd):
         # fill group form
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -25,12 +34,6 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys("sdg")
-        # submit group creation
-        wd.find_element_by_name("submit").click()
-        # return to group page
-        wd.find_element_by_link_text("group page").click()
-        # logout
-        wd.find_element_by_link_text("Logout").click()
 
     def init_group_creation(self, wd):
         # init group creation
