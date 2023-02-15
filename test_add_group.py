@@ -11,8 +11,7 @@ class TestAddGroup(unittest.TestCase):
 
     def test_add_group(self):
         wd = self.wd
-        # open home page
-        wd.get("http://localhost:8085/addressbook/")
+        self.open_home_page(wd)
         # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
@@ -40,7 +39,11 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_link_text("group page").click()
         # logout
         wd.find_element_by_link_text("Logout").click()
-    
+
+    def open_home_page(self, wd):
+        # open home page
+        wd.get("http://localhost:8085/addressbook/")
+
     def is_element_present(self, how, what):
         try: self.wd.find_element(by=how, value=what)
         except NoSuchElementException as e: return False
