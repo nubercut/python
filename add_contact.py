@@ -94,18 +94,6 @@ class AddContact(unittest.TestCase):
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
 
-        wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text("%s" % contact.bday_day)
-        wd.find_element_by_xpath("//option[@value='%s']" % contact.bday_day).click()
-
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text("%s" % contact.bday_month)
-        wd.find_element_by_xpath("//option[@value='%s']" % contact.bday_month).click()
-
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.bday_year)
-
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text("%s" % contact.aday_day)
         wd.find_element_by_xpath("//option[@value='%s']" % contact.aday_day).click()
@@ -117,6 +105,18 @@ class AddContact(unittest.TestCase):
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.aday_year)
+
+        wd.find_element_by_name("bday").click()
+        Select(wd.find_element_by_name("bday")).select_by_visible_text("%s" % contact.bday_day)
+        wd.find_element_by_xpath("//option[@value='%s']" % contact.bday_day).click()
+
+        wd.find_element_by_name("bmonth").click()
+        Select(wd.find_element_by_name("bmonth")).select_by_visible_text("%s" % contact.bday_month)
+        wd.find_element_by_xpath("//option[@value='%s']" % contact.bday_month).click()
+
+        wd.find_element_by_name("byear").click()
+        wd.find_element_by_name("byear").clear()
+        wd.find_element_by_name("byear").send_keys(contact.bday_year)
 
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
