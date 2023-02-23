@@ -12,7 +12,7 @@ def app(request):
 
 def test_add_contact(app):
     app.session.login(username="admin", password="secret")
-    app.create_contact(Contact(firstname="Nubar", middlename="Petrosian", lastname="G", nickname="nick",
+    app.contact.create_contact(Contact(firstname="Nubar", middlename="Petrosian", lastname="G", nickname="nick",
                             file_path="C:\Нубэрдо.jpg", title="aaaaaaaaaa", company="bercut", address="This is address",
                             tel_home="987654321", tel_mobile="123456789", tel_work="987321456", tel_fax="654456654",
                             email_1="email@client.com", email_2="email2@client.com", email_3="email3@client.com",
@@ -23,7 +23,7 @@ def test_add_contact(app):
 
 def test_add_empty_contact(app):
     app.session.login(username="admin", password="secret")
-    app.create_contact(Contact(firstname="", middlename="", lastname="", nickname="",
+    app.contact.create_contact(Contact(firstname="", middlename="", lastname="", nickname="",
                             file_path="", title="", company="", address="",
                             tel_home="", tel_mobile="", tel_work="", tel_fax="",
                             email_1="", email_2="", email_3="",
