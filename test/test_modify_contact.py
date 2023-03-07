@@ -9,3 +9,6 @@ def test_modify_contact(app):
                             homepage="homeeeeee", bday_day="11", bday_month="December", bday_year="1995", aday_day="16",
                             aday_month="November", notes="Modified", address_2="address2", aday_year="2000",
                             phone_2="yes"))
+
+def test_modify_birthday(app):
+    app.contact.modify_test_contact(Contact(bday_day="13", bday_month="October", bday_year="2000"))
