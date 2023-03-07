@@ -2,6 +2,8 @@ from model.contact import Contact
 
 
 def test_modify_contact(app):
+    if app.contact.count() == 0:
+        app.contact.create_contact(Contact(firstname="test"))
     app.contact.modify_test_contact(Contact(firstname="Modified", middlename="Modified", lastname="Modified", nickname="Modified",
                             file_path="", title="Modified", company="Modified", address="This is Modified",
                             tel_home="Modified", tel_mobile="Modified", tel_work="Modified", tel_fax="Modified",
@@ -11,4 +13,6 @@ def test_modify_contact(app):
                             phone_2="yes"))
 
 def test_modify_birthday(app):
+    if app.contact.count() == 0:
+        app.contact.create_contact(Contact(firstname="test"))
     app.contact.modify_test_contact(Contact(bday_day="13", bday_month="October", bday_year="2000"))

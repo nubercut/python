@@ -41,6 +41,8 @@ class GroupHelper:
         self.select_first_group()
         wd.find_element_by_name("edit").click()
         self.fill_group_form(new_group_data)
+        self.update_first_group(wd)
+        self.return_to_group_page()
 
     def update_first_group(self, wd):
         wd.find_element_by_name("update").click()
@@ -53,3 +55,8 @@ class GroupHelper:
         # open groups page
         wd = self.app.wd
         wd.find_element_by_link_text("groups").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_group_page()
+        return len(wd.find_elements_by_name("selected[]"))

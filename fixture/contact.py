@@ -1,5 +1,4 @@
 from selenium.webdriver.support.select import Select
-
 class ContactHelper:
     def __init__(self, app):
         self.app = app
@@ -22,13 +21,15 @@ class ContactHelper:
     def delete_first_contact(self):
         wd = self.app.wd
         self.app.open_home_page()
-        self.select_first_contact(wd)
-        self.submit_first_contact_deletion(wd)
+        self.select_first_contact()
+        self.submit_first_contact_deletion()
 
-    def select_first_contact(self, wd):
+    def select_first_contact(self):
+        wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
-    def submit_first_contact_deletion(self, wd):
+    def submit_first_contact_deletion(self):
+        wd = self.app.wd
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
 
@@ -91,3 +92,7 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
 
+    def count(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        return len(wd.find_elements_by_name("selected[]"))
