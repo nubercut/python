@@ -20,6 +20,7 @@ def test_random_user_homepage_details(app):
     index = randrange(len(contacts_from_homepage_details))
     random_contact_from_homepage = app.contact.get_contact_list()[index]
     random_contact_from_editpage = app.contact.get_contact_info_from_edit_page(index)
+    assert random_contact_from_homepage.id == random_contact_from_editpage.id
     assert random_contact_from_homepage.firstname == random_contact_from_editpage.firstname
     assert random_contact_from_homepage.lastname == random_contact_from_editpage.lastname
     assert random_contact_from_homepage.address == random_contact_from_editpage.address
