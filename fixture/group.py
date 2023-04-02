@@ -1,4 +1,6 @@
 from model.group import Group
+
+
 class GroupHelper:
     def __init__(self, app):
         self.app = app
@@ -14,8 +16,7 @@ class GroupHelper:
         self.fill_group_form(group)
         wd.find_element_by_name("submit").click()
         self.return_to_group_page()
-        self.group_cache = None #сбросили кэш
-
+        self.group_cache = None  # сбросили кэш
 
     def fill_group_form(self, group):
         wd = self.app.wd
@@ -37,14 +38,13 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
-
     def delete_group_by_index(self, index):
         wd = self.app.wd
         self.open_group_page()
         self.select_group_by_index(index)
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
-        self.group_cache = None #сбросили кэш
+        self.group_cache = None  # сбросили кэш
 
     def modify_first_group(self):
         self.modify_group_by_index(0)
@@ -57,8 +57,7 @@ class GroupHelper:
         self.fill_group_form(new_group_data)
         self.update_first_group(wd)
         self.return_to_group_page()
-        self.group_cache = None #сбросили кэш
-
+        self.group_cache = None  # сбросили кэш
 
     def update_first_group(self, wd):
         wd.find_element_by_name("update").click()

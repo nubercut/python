@@ -2,9 +2,11 @@ from selenium.webdriver.support.select import Select
 from model.contact import Contact
 import re
 
+
 class ContactHelper:
     def __init__(self, app):
         self.app = app
+
     def create_contact(self, contact):
         wd = self.app.wd
         self.app.open_home_page()
@@ -56,7 +58,6 @@ class ContactHelper:
         self.update_modify_changes(wd)
         self.app.return_to_home_page()
         self.contact_cache = None
-
 
     def update_modify_changes(self, wd):
         wd.find_element_by_name("update").click()
@@ -130,7 +131,8 @@ class ContactHelper:
                 all_emails = cells[4].text
                 address = cells[3].text
                 self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  all_phones_from_homepage=all_phones, all_emails_from_homepage=all_emails, address=address))
+                                                  all_phones_from_homepage=all_phones,
+                                                  all_emails_from_homepage=all_emails, address=address))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -162,8 +164,9 @@ class ContactHelper:
         email_3 = wd.find_element_by_xpath("//input[@name='email3']").get_attribute("value")
         address = wd.find_element_by_xpath("//textarea[@name='address']").get_attribute("value")
 
-        return Contact(firstname=firstname, lastname=lastname, id=id,tel_home=tel_home, tel_work=tel_work,
-                       tel_mobile=tel_mobile, phone_2=phone_2, email_1=email_1, email_2=email_2, email_3=email_3, address=address)
+        return Contact(firstname=firstname, lastname=lastname, id=id, tel_home=tel_home, tel_work=tel_work,
+                       tel_mobile=tel_mobile, phone_2=phone_2, email_1=email_1, email_2=email_2, email_3=email_3,
+                       address=address)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
