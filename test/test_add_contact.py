@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
+from model.group import Group
 import random
 import string
 
@@ -25,3 +26,16 @@ def test_add_contact(app, db, json_contacts, check_ui):
         assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contact.get_group_list(),
                                                                      key=Contact.id_or_max)
 
+def test_add_contact_to_random_group(app, db):
+    groups = db.get_group_list()
+    if len(db.get_group_list()) == 0:
+        app.group.create(Group(name="Added group"))
+        groups = db.get_group_list()
+    group = random.choice(groups)
+    contacts = db.get_contacts_not_in_group(group)
+    if not contacts:
+        app.contact.create_contact(Contact(firstname="Added contact"))
+        contacts = db.get_contacts_not_in_group(group)
+    contact = random.choice(contacts)
+    app.contact.add_contact_to_random_group(contact, group)
+    assert contact in db.get_contacts_in_group(group)

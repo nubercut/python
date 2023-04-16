@@ -1,4 +1,5 @@
 import pymysql.cursors
+import pymysql.converters
 from model.group import Group
 from model.contact import Contact
 class DbFixture:

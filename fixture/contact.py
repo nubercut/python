@@ -1,6 +1,7 @@
-from selenium.webdriver.support.select import Select
 from model.contact import Contact
 import re
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
 
 
 class ContactHelper:
@@ -202,3 +203,35 @@ class ContactHelper:
         phone_2 = re.search("P: (.*)", text).group(1)
         return Contact(tel_home=tel_home, tel_work=tel_work,
                        tel_mobile=tel_mobile, phone_2=phone_2)
+
+    def add_contact_to_random_group(self, contact, group):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_contact_by_id(contact.id)
+        self.select_group_to_add_contact(group.id)
+        self.add_to_group_button()
+        self.contact_cache = None
+
+    def remove_contact_from_group(self, contact, group):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_group_from_list(group.id)
+        self.select_contact_by_id(contact.id)
+        self.remove_from_group_button()
+
+
+    def select_group_to_add_contact(self, group_id):
+        wd = self.app.wd
+        Select(wd.find_element(By.NAME, "to_group")).select_by_value(f"{group_id}")
+
+    def select_group_from_list(self, group_id):
+        wd = self.app.wd
+        Select(wd.find_element(By.NAME, "group")).select_by_value(f"{group_id}")
+
+    def add_to_group_button(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//input[@name='add']").click()
+
+    def remove_from_group_button(self):
+        wd = self.app.wd
+        wd.find_element(By.NAME, "remove").click()
