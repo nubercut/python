@@ -155,9 +155,9 @@ class ContactHelper:
                 all_phones = cells[5].text
                 all_emails = cells[4].text
                 address = cells[3].text
-                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
+                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id, address=address,
                                                   all_phones_from_homepage=all_phones,
-                                                  all_emails_from_homepage=all_emails, address=address))
+                                                  all_emails_from_homepage=all_emails))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):

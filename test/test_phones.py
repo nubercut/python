@@ -28,12 +28,12 @@ def test_random_user_homepage_details(app):
     assert random_contact_from_homepage.all_phones_from_homepage == merge_phones_like_on_homepage(random_contact_from_editpage)
 
 
-def test_contacts_assertion_from_homepage_and_db(app, json_contacts, db):
+def test_contacts_assertion_from_homepage_and_db(app, db):
     if len(db.get_contact_list()) == 0:
-        app.contact.create_contact(json_contacts)
+        app.contact.create_contact(Contact(firstname="Firstname", lastname="lastname", address="Address"))
     contacts_from_homepage = app.contact.get_contact_list()
     contacts_from_db = db.get_contact_list()
-    assert sorted(contacts_from_homepage, key=Contact.id_or_max) == sorted(map(clear_contact, contacts_from_db),
+    assert sorted(contacts_from_homepage, key=Contact.id_or_max) == sorted(contacts_from_db,
                                                                            key=Contact.id_or_max)
     for i, contact in enumerate(sorted(contacts_from_homepage, key=Contact.id_or_max)):
         assert contact.lastname == clear_space(contacts_from_db[i].lastname)
@@ -43,7 +43,7 @@ def test_contacts_assertion_from_homepage_and_db(app, json_contacts, db):
         assert contact.all_phones_from_homepage == merge_phones_like_on_homepage(contacts_from_db[i])
 
 def clear(s):
-    return re.sub("[() -]", "", s)
+    return re.sub("[/.() -]", "", s)
 
 def clear_space(s):
     return " ".join(s.split()) if s is not None else ""
@@ -77,4 +77,4 @@ def merge_phones_like_on_homepage(contact):
 
 def merge_emails_like_on_homepage(contact):
     return "\n".join(filter(lambda x: x is not None and x != "",
-                            [clear_space(contact.email_1), clear_space(contact.email_2), clear_space(contact.email_3)]))
+                            [contact.email_1, contact.email_2, contact.email_3]))
