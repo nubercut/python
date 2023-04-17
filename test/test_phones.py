@@ -30,7 +30,10 @@ def test_random_user_homepage_details(app):
 
 def test_contacts_assertion_from_homepage_and_db(app, db):
     if len(db.get_contact_list()) == 0:
-        app.contact.create_contact(Contact(firstname="Firstname", lastname="lastname", address="Address"))
+        app.contact.create_contact(Contact(firstname="Firstname", lastname="lastname", address="Address",
+                                           tel_mobile="79117878778", tel_home="12345", tel_work="1471",
+                                               phone_2="tel", email_1="email1@yandex.com", email_2="email2@yandex.com",
+                                               email_3="email3@yandex.com"))
     contacts_from_homepage = app.contact.get_contact_list()
     contacts_from_db = db.get_contact_list()
     assert sorted(contacts_from_homepage, key=Contact.id_or_max) == sorted(contacts_from_db,
